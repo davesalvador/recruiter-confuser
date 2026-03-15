@@ -11,6 +11,9 @@ import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import AdPopup from "./components/AdPopup";
 import { AwardsGrid, QuotesGrid, WinsGrid } from "./components/BadgeGrid";
+import CssIsAwesome from "./components/CssIsAwesome";
+import EmojiExplosion from "./components/EmojiExplosion";
+import CursorTrail from "./components/CursorTrail";
 
 export default function AbstractPortfolio() {
   const [showLoader, setShowLoader] = useState(true);
@@ -80,7 +83,10 @@ export default function AbstractPortfolio() {
         NIGHTMARE EDITION • UNAUTHORIZED GLITTER PATCH APPLIED 🔥🔥🔥
       </marquee>
 
+      <EmojiExplosion />
+      <CursorTrail />
       <FloatingEmojis />
+      <CssIsAwesome />
       <PromptLeakSidebar />
 
       <main className="max-w-[1500px] mx-auto px-4 py-6">
