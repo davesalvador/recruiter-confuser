@@ -1,9 +1,10 @@
 interface NavbarProps {
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
+  onSpinningS: () => void;
 }
 
-export default function Navbar({ isDarkMode, onToggleDarkMode }: NavbarProps) {
+export default function Navbar({ isDarkMode, onToggleDarkMode, onSpinningS }: NavbarProps) {
   return (
     <nav
       className={`${
@@ -38,7 +39,10 @@ export default function Navbar({ isDarkMode, onToggleDarkMode }: NavbarProps) {
             } text-4xl md:text-6xl font-black underline decoration-wavy inline-block`}
           >
             Dave{" "}
-            <span className="inline-block animate-[spin_2.5s_linear_infinite]">
+            <span
+              onClick={onSpinningS}
+              className="inline-block animate-[spin_2.5s_linear_infinite] cursor-pointer hover:text-fuchsia-500 transition-colors"
+            >
               S
             </span>
             alvador

@@ -1,1 +1,300 @@
 @import "tailwindcss";
+
+/* ===== HOLOGRAPHIC CARD ===== */
+
+.holo-card {
+  --card-w: 340px;
+  --card-h: 480px;
+  --card-radius: 18px;
+
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  will-change: transform;
+  box-shadow:
+    0 0 6px rgba(0, 0, 0, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.25),
+    0 0 calc(var(--hyp) * 60px) rgba(255, 0, 170, calc(var(--hyp) * 0.25)),
+    0 0 calc(var(--hyp) * 120px) rgba(0, 255, 238, calc(var(--hyp) * 0.15));
+}
+
+.holo-card:hover {
+  transition: transform 0.05s ease-out, box-shadow 0.15s ease-out;
+}
+
+/* ---- card content ---- */
+
+.holo-card__content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--card-radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(135deg, #1a0a2e 0%, #0d1b3e 40%, #1a0a2e 100%);
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  color: white;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.holo-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.holo-card__label {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ff00aa, #00ffee, #ffff00, #ff00aa);
+  background-size: 300% 100%;
+  animation: holo-text-shift 4s linear infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.holo-card__hp {
+  font-size: 13px;
+  font-weight: 900;
+  color: #ff4444;
+  text-shadow: 0 0 8px rgba(255, 68, 68, 0.5);
+}
+
+.holo-card__portrait {
+  background: linear-gradient(145deg, rgba(255, 0, 170, 0.15), rgba(0, 255, 238, 0.15));
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 14px;
+}
+
+.holo-card__portrait-inner {
+  background: linear-gradient(180deg, #0a0a2e 0%, #1a0a3e 100%);
+  border-radius: 8px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-card__portrait-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at var(--px) var(--py),
+      rgba(255, 0, 170, 0.2) 0%,
+      transparent 60%
+    );
+}
+
+.holo-card__portrait-emoji {
+  font-size: 72px;
+  filter: drop-shadow(0 0 20px rgba(255, 0, 170, 0.4));
+}
+
+.holo-card__name {
+  font-size: 22px;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-shadow:
+    0 0 10px rgba(255, 0, 170, 0.5),
+    0 0 30px rgba(0, 255, 238, 0.2);
+  margin-bottom: 2px;
+}
+
+.holo-card__title {
+  font-size: 10px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 14px;
+}
+
+.holo-card__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.holo-card__stat {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 6px 4px;
+  text-align: center;
+}
+
+.holo-card__stat-label {
+  display: block;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: #ff00aa;
+  margin-bottom: 2px;
+}
+
+.holo-card__stat-value {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.holo-card__desc {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+.holo-card__desc p {
+  font-size: 11px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.65);
+  font-style: italic;
+}
+
+.holo-card__footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.1em;
+}
+
+/* ---- holographic glare overlay ---- */
+
+.holo-card__glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: var(--card-radius);
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at var(--px) var(--py),
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.1) 20%,
+      transparent 60%
+    );
+  mix-blend-mode: overlay;
+  opacity: var(--hyp);
+}
+
+/* ---- holographic rainbow overlay ---- */
+
+.holo-card__holo {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: var(--card-radius);
+  pointer-events: none;
+  background:
+    /* prismatic color bands */
+    repeating-linear-gradient(
+      133deg,
+      rgba(255, 0, 0, 0.12) 0%,
+      rgba(255, 127, 0, 0.12) 3%,
+      rgba(255, 255, 0, 0.12) 6%,
+      rgba(0, 255, 0, 0.12) 9%,
+      rgba(0, 0, 255, 0.12) 12%,
+      rgba(75, 0, 130, 0.12) 15%,
+      rgba(148, 0, 211, 0.12) 18%,
+      rgba(255, 0, 0, 0.12) 21%
+    ),
+    /* secondary offset bands for depth */
+    repeating-linear-gradient(
+      -37deg,
+      rgba(0, 255, 238, 0.08) 0%,
+      rgba(255, 0, 170, 0.08) 5%,
+      rgba(255, 255, 0, 0.08) 10%,
+      rgba(0, 255, 238, 0.08) 15%
+    ),
+    /* radial position-aware color burst */
+    radial-gradient(
+      ellipse at var(--px) var(--py),
+      rgba(255, 0, 170, 0.3) 0%,
+      rgba(0, 255, 238, 0.15) 30%,
+      rgba(255, 255, 0, 0.1) 50%,
+      transparent 70%
+    );
+  background-size:
+    200% 200%,
+    200% 200%,
+    100% 100%;
+  background-position:
+    calc(var(--mx) * 100%) calc(var(--my) * 100%),
+    calc((1 - var(--mx)) * 100%) calc(var(--my) * 100%),
+    0% 0%;
+  mix-blend-mode: color-dodge;
+  filter: brightness(0.8) contrast(1.8);
+  opacity: calc(0.3 + var(--hyp) * 0.7);
+  transition: opacity 0.3s ease-out;
+}
+
+/* ---- sparkle noise texture ---- */
+
+.holo-card__sparkle {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: var(--card-radius);
+  pointer-events: none;
+  background-image:
+    /* tiny "sparkle" dots using radial gradients */
+    radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.9) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.7) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 45% 75%, rgba(255, 255, 255, 0.8) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 75% 55%, rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 25% 85%, rgba(255, 255, 255, 0.7) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 55% 35%, rgba(255, 255, 255, 0.8) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 35% 55%, rgba(255, 255, 255, 0.5) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 65% 85%, rgba(255, 255, 255, 0.7) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 90% 45%, rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 10% 60%, rgba(255, 255, 255, 0.8) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.5) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.9) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.7) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 40% 90%, rgba(255, 255, 255, 0.5) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 60% 50%, rgba(255, 255, 255, 0.8) 0.5px, transparent 0.5px);
+  background-size: 100% 100%;
+  mix-blend-mode: overlay;
+  opacity: calc(var(--hyp) * 1.5);
+  transition: opacity 0.2s ease-out;
+}
+
+@keyframes holo-text-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* responsive */
+@media (max-width: 400px) {
+  .holo-card {
+    --card-w: 280px;
+    --card-h: 400px;
+  }
+}

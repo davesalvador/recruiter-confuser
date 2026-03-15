@@ -14,12 +14,14 @@ import { AwardsGrid, QuotesGrid, WinsGrid } from "./components/BadgeGrid";
 import CssIsAwesome from "./components/CssIsAwesome";
 import EmojiExplosion from "./components/EmojiExplosion";
 import CursorTrail from "./components/CursorTrail";
+import HoloCard from "./components/HoloCard";
 
 export default function AbstractPortfolio() {
   const [showLoader, setShowLoader] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeAd, setActiveAd] = useState<null | "hire" | "meme">(null);
   const [systemToast, setSystemToast] = useState<string | null>(null);
+  const [showHoloCard, setShowHoloCard] = useState(false);
   const [fallingGithub, setFallingGithub] = useState<null | {
     x: number;
     y: number;
@@ -120,12 +122,30 @@ export default function AbstractPortfolio() {
           <AdPopup activeAd={activeAd} onClose={() => setActiveAd(null)} />
         )}
 
+        {showHoloCard && (
+          <div
+            className="fixed inset-0 z-[998] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6"
+            onClick={() => setShowHoloCard(false)}
+          >
+            <div onClick={(e) => e.stopPropagation()}>
+              <HoloCard />
+              <button
+                onClick={() => setShowHoloCard(false)}
+                className="mt-4 mx-auto block bg-black text-yellow-300 px-6 py-3 border-[4px] border-yellow-300 font-black text-lg hover:scale-110 hover:rotate-3 transition-all duration-300"
+              >
+                CLOSE THE SACRED CARD
+              </button>
+            </div>
+          </div>
+        )}
+
         <AwardsGrid />
         <QuotesGrid />
 
         <Navbar
           isDarkMode={isDarkMode}
           onToggleDarkMode={() => setIsDarkMode((v) => !v)}
+          onSpinningS={() => setShowHoloCard(true)}
         />
 
         <WinsGrid />
